@@ -26,3 +26,22 @@ def calcular_valor_incricao(idade, distancia, lote):
     if idade >= 60:
         valor /= 2
     return valor 
+
+def selecionar_categoria(idade):
+    """Selecionar a categoria do corredor baseado na sua idade.
+          Juvenil: 16 a 19 anos;
+          Adulto: 20 a 39 anos;
+          Master: 40 a 59 anos;
+          Veterano: 60 anos ou mais.
+       """
+    if idade < 16:
+           return "Não permitido"
+    elif idade <= 19:
+           return "Juvenil"
+    elif idade <= 39:
+           return "Adulto"
+    elif idade <= 59:
+           return "Master"
+    else: 
+           return "Veterano"
+    
