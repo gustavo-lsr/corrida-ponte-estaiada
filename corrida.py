@@ -44,4 +44,27 @@ def selecionar_categoria(idade):
            return "Master"
     else: 
            return "Veterano"
-    
+
+
+def informar_primeiro_nome(nome_completo):
+  """retorna o primeiro nome;"""
+  nome = nome_completo.strip()
+  posicao = nome.find(" ")
+  if posicao == -1:
+    return nome
+  return nome[:posicao]
+
+
+def informar_ultimo_nome(nome_completo):
+  """retorna o ultimo nome;"""
+  nome = nome_completo.strip()
+  posicao = nome.rfind(" ")
+  return nome[posicao + 1:]
+
+
+
+def gerar_codigo(nome_completo, idade):
+  """gera o código do corredor
+     3 primeiras letras do primeiro nome(maiúsculas) + 3 primeiras letras do último nome(maiúsculas) + idade;
+     exemplo: "Gustavo Patricio Silva", 21 --> 'GUSSIL21';"""
+  
