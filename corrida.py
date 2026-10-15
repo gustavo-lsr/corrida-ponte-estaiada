@@ -88,3 +88,20 @@ def tempo_valido(tempo):
     if int(minutos) > 59 or int(segundos) > 59:
         return False
     return int(horas) * 3600 + int(minutos) * 60 + int(segundos) > 0
+
+def converter_tempo_para_segundos(tempo):
+    """Converte um tempo válido 'HH:MM:SS' para segundos (int).
+    """
+    horas = int(tempo[0:2])
+    minutos = int(tempo[3:5])
+    segundos = int(tempo[6:8])
+    return horas * 3600 + minutos * 60 + segundos
+
+def calcular_pace(tempo_segundos, distancia):
+    """Retorna o pace em segundos por km, desprezando frações de segundo.
+    """
+    return tempo_segundos // distancia
+
+def formatar_pace(pace_segundos):
+    """Formata o pace (segundos por km) como texto, ex.: 4'18\"/km."""
+    return f"{pace_segundos // 60}'{pace_segundos % 60:02d}\"/km"
