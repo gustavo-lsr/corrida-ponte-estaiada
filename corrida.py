@@ -222,3 +222,37 @@ def calcular_resultado():
 
 
 
+
+#Programa principal
+
+
+def main():
+    """Exibe o menu até o usuário sair e mostra o resumo da sessão."""
+    total_inscricoes = 0
+    total_arrecadado = 0.0
+ 
+    while True:
+        print("=== CORRIDA NOTURNA DA PONTE ESTAIADA ===")
+        print("1 - Fazer inscrição")
+        print("2 - Calcular resultado")
+        print("3 - Sair")
+        opcao = ler_opcao("Escolha uma opção: ", (1, 2, 3))
+ 
+        if opcao == 1:
+            valor = fazer_inscricao()
+            if valor is not None:
+                total_inscricoes += 1
+                total_arrecadado += valor
+        elif opcao == 2:
+            calcular_resultado()
+        else:
+            print("\n===== RESUMO DA SESSÃO =====")
+            print(f"Inscrições feitas: {total_inscricoes}")
+            print(f"Total arrecadado : {formatar_reais(total_arrecadado)}")
+            print("============================")
+            break
+ 
+ 
+if __name__ == "__main__":
+    main()
+
