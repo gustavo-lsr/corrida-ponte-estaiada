@@ -103,5 +103,34 @@ def calcular_pace(tempo_segundos, distancia):
     return tempo_segundos // distancia
 
 def formatar_pace(pace_segundos):
-    """Formata o pace (segundos por km) como texto, ex.: 4'18\"/km."""
+    """Formata o pace (segundos por km) como texto, ex.: 4'18\"/km.
+    """
     return f"{pace_segundos // 60}'{pace_segundos % 60:02d}\"/km"
+
+
+def formatar_reais(valor):
+    """Formata um valor em reais com duas casas, ex.: 'R$ 80,00'.
+    """
+    return f"R$ {valor:.2f}".replace(".", ",")
+
+def obter_tempo_limite(categoria, distancia):
+    """Retorna o tempo-limite de premiação, em segundos.
+ 
+    Juvenil e Master: 25:00 (5 km) e 52:00 (10 km)
+    Adulto: 22:00 (5 km) e 46:00 (10 km)
+    Veterano: 30:00 (5 km) e 1:03:00 (10 km)
+    """
+    if categoria == "Adulto":
+        return 22 * 60 if distancia == 5 else 46 * 60
+    if categoria == "Veterano":
+        return 30 * 60 if distancia == 5 else 63 * 60
+    return 25 * 60 if distancia == 5 else 52 * 60
+
+
+def verificar_premiacao(categoria, distancia, tempo_segundos):
+    """Retorna True se o tempo é menor ou igual ao limite da categoria.
+    """
+    return tempo_segundos <= obter_tempo_limite(categoria, distancia)
+
+
+
