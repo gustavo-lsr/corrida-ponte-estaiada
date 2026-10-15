@@ -68,3 +68,7 @@ def gerar_codigo(nome_completo, idade):
      3 primeiras letras do primeiro nome(maiúsculas) + 3 primeiras letras do último nome(maiúsculas) + idade;
      exemplo: "Gustavo Patricio Silva", 21 --> 'GUSSIL21';"""
   
+  primeiro = informar_primeiro_nome(nome_completo)
+  ultimo = informar_ultimo_nome(nome_completo)
+  return primeiro[:3].upper() + ultimo[:3].upper() + str(idade)
+  
