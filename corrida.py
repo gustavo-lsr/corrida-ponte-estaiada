@@ -4,7 +4,7 @@ idade_minima = 16
 """
 
 
-def calcular_valor_incricao(idade, distancia, lote):
+def calcular_valor_inscricao(idade, distancia, lote):
     """Calcula o valor da inscrição em reais.
 
     Regras de negócio:
@@ -133,6 +133,8 @@ def verificar_premiacao(categoria, distancia, tempo_segundos):
     return tempo_segundos <= obter_tempo_limite(categoria, distancia)
 
 
+#LEITURA E VALIDAÇÃO DE ENTRADAS
+
 def ler_nome():
     """Pede o nome completo até receber nome e sobrenome."""
     while True:
@@ -173,6 +175,50 @@ def ler_tempo():
         print("Tempo inválido. Use HH:MM:SS, com minutos e segundos até 59.")
 
 
+
+#Ações do MENU
+
+def fazer_inscricao():
+    """Faz a inscrição. Retorna o valor pago, ou None se for recusada."""
+    nome = ler_nome()
+    idade = ler_idade()
+    if idade < idade_minima:
+        print(f"Inscrição recusada: idade mínima de {idade_minima} anos.\n")
+        return None
+    distancia = ler_opcao("Distância em km (5 ou 10): ", (5, 10))
+    lote = ler_opcao("Lote (1 ou 2): ", (1, 2))
+ 
+    valor = calcular_valor_inscricao(idade, distancia, lote)
+    print("\n===== COMPROVANTE DE INSCRIÇÃO =====")
+    print(f"Corredor : {informar_primeiro_nome(nome)}")
+    print(f"Código   : {gerar_codigo(nome, idade)}")
+    print(f"Categoria: {selecionar_categoria(idade)}")
+    print(f"Distância: {distancia} km")
+    print(f"valor    : {formatar_reais(valor)}")
+    print("====================================\n")
+    return valor
+
+
+def calcular_resultado():
+    """Lê os dados da prova e exibe o resultado."""
+    idade = ler_idade()
+    if idade < idade_minima:
+        print(f"Não há categoria para menores de {idade_minima} anos.\n")
+        return
+    distancia = ler_opcao("Distância em km (5 ou 10): ", (5, 10))
+    tempo = ler_tempo()
+ 
+    categoria = selecionar_categoria(idade)
+    segundos = converter_tempo_para_segundos(tempo)
+    pace = calcular_pace(segundos, distancia)
+    premiado = verificar_premiacao(categoria, distancia, segundos)
+ 
+    print("\n===== RESULTADO =====")
+    print(f"Categoria: {categoria}")
+    print(f"Tempo    : {segundos} segundos")
+    print(f"Pace     : {formatar_pace(pace)}")
+    print(f"Premiado : {'Sim' if premiado else 'Não'}")
+    print("=====================\n")
 
 
 
