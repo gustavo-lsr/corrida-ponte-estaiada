@@ -133,4 +133,46 @@ def verificar_premiacao(categoria, distancia, tempo_segundos):
     return tempo_segundos <= obter_tempo_limite(categoria, distancia)
 
 
+def ler_nome():
+    """Pede o nome completo até receber nome e sobrenome."""
+    while True:
+        nome = input("Nome completo: ").strip()
+        if " " in nome:
+            return nome
+        print("Digite o nome completo (nome e sobrenome).")
+
+
+
+def ler_idade():
+    """Pede a idade até receber um inteiro entre 1 e 120."""
+    while True:
+        texto = input("Idade: ").strip()
+        if texto.isdecimal() and 1 <= int(texto) <= 120:
+            return int(texto)
+        print("Idade inválida. Digite um número inteiro entre 1 e 120.")
+
+
+
+def ler_opcao(pergunta, validas):
+    """Pede um número até que esteja entre as opções válidas."""
+    while True:
+        texto = input(pergunta).strip()
+        if texto.isdecimal() and int(texto) in validas:
+            return int(texto)
+        opcoes = " ou ".join(str(v) for v in validas)
+        print(f"Opção inválida. Digite {opcoes}.")
+
+
+
+def ler_tempo():
+    """Pede o tempo até receber um HH:MM:SS válido."""
+    while True:
+        tempo = input("Tempo de prova (HH:MM:SS): ").strip()
+        if tempo_valido(tempo):
+            return tempo
+        print("Tempo inválido. Use HH:MM:SS, com minutos e segundos até 59.")
+
+
+
+
 
