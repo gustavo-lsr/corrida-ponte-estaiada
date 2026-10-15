@@ -71,4 +71,20 @@ def gerar_codigo(nome_completo, idade):
   primeiro = informar_primeiro_nome(nome_completo)
   ultimo = informar_ultimo_nome(nome_completo)
   return primeiro[:3].upper() + ultimo[:3].upper() + str(idade)
-  
+
+def tempo_valido(tempo):
+    """Retorna True se o texto estiver no formato HH:MM:SS válido.
+    O tempo é desmontado por fatiamento: horas [0:2], minutos [3:5], segundos [6:8]. Rejeita '1:02:59, '00h22m00s', minutos ou segundos acima de 59 e o tempo zerado.
+    """
+    if len(tempo) != 8:
+         return False
+    if tempo[2:3] != ":" or tempo[5:6] != ":":
+        return False
+    horas = tempo[0:2]
+    minutos = tempo[3:5]
+    segundos = tempo[6:8]
+    if not (horas.isdecimal() and minutos.isdecimal() and segundos.isdecimal()):
+        return False
+    if int(minutos) > 59 or int(segundos) > 59:
+        return False
+    return int(horas) * 3600 + int(minutos) * 60 + int(segundos) > 0
